@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * Implements the car service create, read, update or delete
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Service;
 public class CarService {
 
     private final CarRepository repository;
+    private final MapsClient mapsClient;
+    private final PriceClient priceClient;
 
     @Autowired
     private MapsClient mapsClient;
@@ -108,17 +111,11 @@ public class CarService {
      * Deletes a given car by ID
      * @param id the ID number of the car to delete
      */
-    public void delete(Long id) {
-        /**
-         * TODO: Find the car by ID from the `repository` if it exists.
-         *   If it does not exist, throw a CarNotFoundException
-         */
-
-
-        /**
-         * TODO: Delete the car from the repository.
-         */
-
-
+    public void delete(Long id) throws CarNotFoundException {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        } else {
+            throw new CarNotFoundException();
+        }
     }
 }
