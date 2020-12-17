@@ -39,7 +39,16 @@ public class CarService {
      * @return a list of all vehicles in the CarRepository
      */
     public List<Car> list() {
-        return repository.findAll();
+
+        // Ideally we should be using the stream api and lambda instead of this For Loop, we'll come back to it later
+        // For loop through the list and set price
+        List<Car> carList = repository.findAll();
+        for (Car car : carList) {
+
+            // Call the pricing-service (using the webClient) while passing in each car's Id, and set the price attribute on each car object
+            car.setPrice(priceClient.getPrice(car.getId()));
+        }
+        return carList;
     }
 
     /**
