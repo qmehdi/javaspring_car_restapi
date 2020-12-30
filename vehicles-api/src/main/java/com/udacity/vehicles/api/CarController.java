@@ -104,8 +104,8 @@ class CarController {
         // Save the car using the `save` method from the Car service
         carService.save(car);
 
-        Resource<Car> resource = assembler.toResource(carService.save(car));
-        return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
+        Resource<Car> resource = assembler.toResource(carService.findById(id));
+        return ResponseEntity.ok(resource);
     }
 
     /**
