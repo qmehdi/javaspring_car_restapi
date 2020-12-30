@@ -91,7 +91,7 @@ public class CarControllerTest {
         Long carId = 1L;
         Car car = getCar();
         car.getDetails().setModel("ABC");
-        car.setCondition(Condition.NEW);
+        car.setCondition(car.getCondition());
         mvc.perform(put(new URI("/cars/" + carId))
                 .content(json.write(car).getJson())
                 .contentType(MediaType.APPLICATION_JSON)
