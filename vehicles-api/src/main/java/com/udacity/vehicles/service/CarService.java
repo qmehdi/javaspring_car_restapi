@@ -127,6 +127,10 @@ public class CarService {
              * TODO: Delete the car from the repository.
              */
             repository.deleteById(id);
+
+            // After deleting the car, assign a new price to the deleted vehicleId
+            priceClient.assignNewPrice(id);
+
         } else {
             throw new CarNotFoundException();
         }

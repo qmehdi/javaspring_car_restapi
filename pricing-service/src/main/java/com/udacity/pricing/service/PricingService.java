@@ -46,4 +46,11 @@ public class PricingService {
                 .multiply(new BigDecimal(5000d)).setScale(2, RoundingMode.HALF_UP);
     }
 
+    // This method is invoked as part of a delete car operation to update price of the deleted vehicleId
+    public static Price assignNewPrice(Long vehicleId) throws PriceException {
+
+        // Replace the existing price with the newly generated random price
+        return PRICES.replace(vehicleId, new Price("USD", randomPrice(), vehicleId));
+    }
+
 }
