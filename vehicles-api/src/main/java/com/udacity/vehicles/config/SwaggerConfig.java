@@ -1,4 +1,4 @@
-package com.udacity.spring_data_rest.config;
+package com.udacity.vehicles.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
